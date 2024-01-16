@@ -4,16 +4,16 @@ import NavBar from "./navbar";
 import { Footer } from "./footer";
 import "../style.css";
 
-const Layout = ({ data, title, children }: any) => {
-  // const data = useStaticQuery(graphql`
-  //   query {
-  //     site {
-  //       siteMetadata {
-  //         title
-  //       }
-  //     }
-  //   }
-  // `);
+const Layout = ({ title, children }: any) => {
+  const data = useStaticQuery(graphql`
+    query {
+      site {
+        siteMetadata {
+          title
+        }
+      }
+    }
+  `);
   // const query = graphql`
   //   query MyQuery {
   //     allContentfulProjects {
@@ -27,8 +27,19 @@ const Layout = ({ data, title, children }: any) => {
   //   }
   // `;
   return (
-    <div>
-      {/* <header>{data.site.siteMetadata.title}</header> */}
+    <>
+      <head>
+        {/* <title>{data.site.siteMetadata.title}</title>
+        <link
+          href="https://fonts.googleapis.com/css2?family=Raleway&display=swap"
+          rel="stylesheet"
+        /> */}
+        <html lang="en" />
+        <meta name="description" content="Portfolio page"></meta>
+        <title>Portfolio</title>
+        <link rel="canonical" href="http://mysite.com/example" />
+      </head>
+
       <NavBar />
 
       {children}
@@ -37,7 +48,7 @@ const Layout = ({ data, title, children }: any) => {
         © {new Date().getFullYear()}, Built with {` `}
         <a href="https://www.gatsbyjs.com">Gatsby</a>{" "}
       </footer> */}
-    </div>
+    </>
   );
 };
 

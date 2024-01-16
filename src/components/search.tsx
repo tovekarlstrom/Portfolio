@@ -48,8 +48,8 @@ const Search = ({ searchIndex }: any) => {
       />
       <ul>
         {results.map((page) => (
-          <li key={page.id}>
-            <Link to={`/${page.slug}`}>{page.projectTitle}</Link>
+          <li style={{ cursor: "pointer" }} key={page.id}>
+            <Link to={`/projects/${page.slug}`}>{page.projectTitle}</Link>
 
             <p>{page.categories.toString()}</p>
           </li>

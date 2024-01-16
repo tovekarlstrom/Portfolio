@@ -11,66 +11,19 @@ import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 import "swiper/css/scrollbar";
+import { GatsbyImage, IGatsbyImageData, getImage } from "gatsby-plugin-image";
 
 const Blog = ({ data }: any) => {
   const posts = data.contentfulProjects;
-  const [imageIndex, setImageIndex] = useState("");
+  const [imageIndex, setImageIndex] = useState<IGatsbyImageData | null>(null);
   console.log("indexImage", imageIndex);
+  //log posts
+  console.log("posts", posts.images);
+  const image = getImage(data.contentfulProjects.images);
   return (
     <Layout>
-      <Container blurBackground={imageIndex !== ""}>
+      <Container blurBackground={imageIndex !== null}>
         <ProjectTitle>{posts.projectTitle}</ProjectTitle>
-        {/* <div style={{ width: "200px" }}>
-            {posts.projectThumbnail && (
-              <img
-                style={{ width: "100%" }}
-                src={posts.projectThumbnail.url}
-                alt=""
-              />
-            )}
-          </div> */}
-
-        {/* {posts.projectImages && <img src={posts.projectImages.url} alt="" />} */}
-
-        {/* {posts.images &&
-              posts.images.map((item: any, index: string) => (
-
-                  <div
-                    style={{
-                      padding: "20px",
-                      paddingBottom: "40px",
-                      width: "200px",
-                      height: "200px",
-                      objectFit: "contain",
-                      backgroundColor: "#333232",
-                      margin: "10px",
-                      boxShadow: "0px 4px 4px 0px rgba(0, 0, 0, 0.25)",
-                    }}
-                  >
-                    <img
-                      onClick={() => setImageIndex(item.url)}
-                      key={item.url}
-                      style={{
-                        width: "100%",
-                        height: "100%",
-                        cursor: "pointer",
-                      }}
-                      src={item.url}
-                      alt=""
-                    />
-                    <div
-                      style={{
-                        display: "flex",
-                        justifyContent: "center",
-                        height: "40px",
-                        alignItems: "center",
-                      }}
-                    >
-                      <p style={{ color: "#CF6363" }}>View</p>
-                      <CaretRight color="#CF6363" />
-                    </div>
-                  </div> */}
-
         <InfoContainer>
           <ArtSpan></ArtSpan>
           <Hej>{posts.categories.join(", ")}</Hej>
@@ -97,21 +50,35 @@ const Blog = ({ data }: any) => {
           >
             {posts.images &&
               posts.images.map((item: any, index: string) => (
-                <SwiperSlide>
+                <SwiperSlide
+                  key={index}
+                  onClick={() => setImageIndex(item.gatsbyImageData)}
+                >
                   <div
                     style={{
                       padding: "20px",
                       cursor: "pointer",
-                      paddingBottom: "40px",
+
                       width: "200px",
                       height: "200px",
-                      objectFit: "contain",
+                      objectFit: "cover",
                       backgroundColor: "#333232",
                       margin: "50px",
                       boxShadow: "0px 4px 4px 0px rgba(0, 0, 0, 0.25)",
                     }}
                   >
-                    <img
+                    {item && (
+                      <GatsbyImage
+                        image={item.gatsbyImageData}
+                        alt=""
+                        // onClick={() => setImageIndex(item.gatsbyImageData)}
+                        imgStyle={{
+                          width: "100%",
+                          height: "100%",
+                        }}
+                      />
+                    )}
+                    {/* <img
                       onClick={() => setImageIndex(item.url)}
                       key={item.url}
                       style={{
@@ -120,8 +87,8 @@ const Blog = ({ data }: any) => {
                       }}
                       src={item.url}
                       alt=""
-                    />
-                    <div
+                    /> */}
+                    {/* <div
                       style={{
                         display: "flex",
                         justifyContent: "center",
@@ -129,9 +96,9 @@ const Blog = ({ data }: any) => {
                         alignItems: "center",
                       }}
                     >
-                      {/* <p style={{ color: "#CF6363" }}>View</p>
-                        <CaretRight color="#CF6363" /> */}
-                    </div>
+                      <p style={{ color: "#CF6363" }}>View</p>
+                        <CaretRight color="#CF6363" />
+                    </div> */}
                   </div>
                 </SwiperSlide>
               ))}
@@ -140,9 +107,7 @@ const Blog = ({ data }: any) => {
         </div>
 
         <LinkToProject>
-          <Link to="https://healthlab.onrender.com/">
-            Link to the publiched project
-          </Link>
+          <Link to={posts.link}>Link to the publiched project</Link>
           <ArtSpanContainer top="70px" right="40px">
             <div
               style={{ position: "relative", width: "180px", height: "220px" }}
@@ -153,11 +118,11 @@ const Blog = ({ data }: any) => {
           </ArtSpanContainer>
         </LinkToProject>
       </Container>
-      {imageIndex !== "" && (
+      {imageIndex !== null && (
         <ImageOverlay>
           <div style={{ position: "absolute" }}></div>
           <X
-            onClick={() => setImageIndex("")}
+            onClick={() => setImageIndex(null)}
             style={{
               cursor: "pointer",
               fontSize: "30px",
@@ -165,10 +130,22 @@ const Blog = ({ data }: any) => {
               position: "absolute",
               top: "2px",
               right: "2px",
+              color: "white",
             }}
           />
 
-          <img style={{ width: "100%" }} src={imageIndex} alt="" />
+          {/* <img style={{ width: "100%" }} src={imageIndex} alt="" /> */}
+          {imageIndex && (
+            <GatsbyImage
+              image={imageIndex}
+              alt=""
+              imgStyle={{
+                width: "100%",
+                height: "100%",
+                zIndex: "20",
+              }}
+            />
+          )}
         </ImageOverlay>
       )}
     </Layout>
@@ -240,9 +217,10 @@ const ImageOverlay = styled.div`
   position: absolute;
   top: 50%;
   margin: 10%;
-  padding: 20px;
-  background-color: white; /* Set the background color of the overlay */
+  padding: 27px;
+  background-color: #333232; /* Set the background color of the overlay */
   width: 80%; /* Adjust the width of the overlay as needed */
+
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); /* Add a shadow to the overlay */
 `;
 
@@ -288,16 +266,15 @@ export const query = graphql`
       projectDescription {
         raw
       }
-      categories
-      projectImages {
-        url
-      }
       projectThumbnail {
-        url
+        gatsbyImageData
       }
       images {
-        url
+        gatsbyImageData
       }
+      link
+      githubLink
+      categories
     }
   }
 `;

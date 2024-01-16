@@ -66,7 +66,7 @@ function NavBar() {
       <nav>
         <List>
           {data.site.siteMetadata.menuLinks.map((link: any, index: any) => (
-            <ListItem>
+            <ListItem key={index}>
               <Link
                 activeStyle={{
                   borderBottom: "solid black 1.5px",
