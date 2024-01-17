@@ -14,26 +14,10 @@ const Layout = ({ title, children }: any) => {
       }
     }
   `);
-  // const query = graphql`
-  //   query MyQuery {
-  //     allContentfulProjects {
-  //       nodes {
-  //         id
-  //         categories
-  //         slug
-  //         projectTitle
-  //       }
-  //     }
-  //   }
-  // `;
+
   return (
     <>
       <head>
-        {/* <title>{data.site.siteMetadata.title}</title>
-        <link
-          href="https://fonts.googleapis.com/css2?family=Raleway&display=swap"
-          rel="stylesheet"
-        /> */}
         <html lang="en" />
         <meta name="description" content="Portfolio page"></meta>
         <title>Portfolio</title>
@@ -44,10 +28,6 @@ const Layout = ({ title, children }: any) => {
 
       {children}
       <Footer />
-      {/* <footer>
-        © {new Date().getFullYear()}, Built with {` `}
-        <a href="https://www.gatsbyjs.com">Gatsby</a>{" "}
-      </footer> */}
     </>
   );
 };
@@ -60,6 +40,5 @@ export const Head: HeadFC = () => (
       href="https://fonts.googleapis.com/css2?family=Raleway&display=swap"
       rel="stylesheet"
     />
-    {/* Other head elements */}
   </head>
 );

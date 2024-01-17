@@ -58,12 +58,10 @@ export default function Contact({ data }: any) {
 
         <div
           style={{
-            // padding: "50px",
             marginBottom: "250px",
             marginTop: "150px",
             position: "relative",
             width: "80%",
-            // minWidth: "250px",
           }}
         >
           <ArtSpanContainer top="0px" right="0">

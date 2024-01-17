@@ -1,38 +1,15 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link, graphql, useStaticQuery } from "gatsby";
 import styled from "@emotion/styled";
 import { Search, X, List } from "react-bootstrap-icons";
 import Header from "./header";
-import { bubble as Menu } from "react-burger-menu";
-// export const query = graphql`
-//   query MyQuery {
-//     allContentfulProjects {
-//       nodes {
-//         id
-//         slug
-//         projectTitle
-//         projectDescription {
-//           raw
-//         }
-//         categories
-//         projectImages {
-//           url
-//         }
-//         projectThumbnail {
-//           url
-//         }
-//       }
-//     }
-//   }
-// `;
 
 function NavBar() {
   const [showSearchContainer, setShowSearchContainer] = useState(false);
-  const [smallScreenMenu, setSmallScreenMenu] = useState<boolean | undefined>(
-    undefined
+  const [smallScreenMenu, setSmallScreenMenu] = useState(
+    window.innerWidth > 768 ? false : true
   );
   const [showHamburgerMenu, setShowHamburgerMenu] = useState(false);
-  const [categoryData, setCategoryData] = useState("Select category");
   const [selectedLink, setSelectedLink] = useState(null);
 
   const handleLinkClick = (index: any) => {
@@ -68,7 +45,6 @@ function NavBar() {
       window.removeEventListener("resize", handleResize);
     };
   }, []);
-  console.log("ha,burger", smallScreenMenu);
 
   return (
     <Container>
@@ -155,19 +131,6 @@ function NavBar() {
           {showSearchContainer && (
             <div>
               <Header />
-              {/* <select onChange={(e) => setCategoryData(e.target.value)}>
-              <option value="Select category">Select category</option>
-              {allCategories.map((category: any, index) => (
-                <option key={index} value={category}>
-                  {category}
-                </option>
-              ))}
-            </select>
-            <ul>
-              {filteredPosts.map((item: any) => (
-                <li key={item.id}>{item.projectTitle}</li>
-              ))}
-            </ul> */}
             </div>
           )}
         </nav>

@@ -65,15 +65,14 @@ const IndexPage = ({ data }: Contentful) => {
               alt=""
               style={{
                 objectFit: "cover",
-                width: "500px",
-                height: "520px",
+
                 position: "absolute",
                 right: "0",
+                top: "40%",
                 zIndex: "0",
               }}
             />
           )}
-          {/* <Portrait src={frontPageData.image.url} alt="portrait" /> */}
         </UpperContainer>
       </main>
     </Layout>
@@ -85,7 +84,19 @@ const UpperContainer = styled.div`
   position: relative;
   height: 50vh;
   width: 100%;
-  margin-top: 170px;
+  margin-top: 30px;
+  img {
+    width: 500px;
+    height: 520px;
+  }
+
+  @media (min-width: 768px) {
+    margin-top: 170px;
+    img {
+      width: 700px;
+      height: 730px;
+    }
+  }
 `;
 
 const InnerLeftContainer = styled.div`
@@ -94,11 +105,23 @@ const InnerLeftContainer = styled.div`
   left: 10%;
   z-index: 10;
   h1 {
+    font-size: 30px !important;
   }
   h2 {
-    margin-top: 100px;
-    font-size: 30px;
-    font-weight: 400;
+    margin-top: 50px;
+    font-size: 20px;
+    font-weight: 600;
+  }
+
+  @media (min-width: 768px) {
+    h1 {
+      font-size: 52px;
+    }
+    h2 {
+      margin-top: 100px;
+      font-size: 30px;
+      font-weight: 400;
+    }
   }
 `;
 

@@ -91,7 +91,7 @@ const IndexPage = ({ data }: Contentful) => {
         <Title>Projects</Title>
 
         <ArtSpan top="30px" left="10px"></ArtSpan>
-        {/* <ArtSpan top="1300px" left="10px"></ArtSpan> */}
+
         <ArtSpanContainer top="630px" right="10px">
           <div
             style={{ position: "relative", width: "180px", height: "220px" }}
@@ -100,15 +100,6 @@ const IndexPage = ({ data }: Contentful) => {
             <ArtSpanBottom></ArtSpanBottom>
           </div>
         </ArtSpanContainer>
-        {/* <ArtSpanContainer top="2000px" right="10px">
-          <div
-            style={{ position: "relative", width: "180px", height: "220px" }}
-          >
-            <ArtSpanTop></ArtSpanTop>
-            <ArtSpanBottom></ArtSpanBottom>
-          </div>
-        </ArtSpanContainer> */}
-
         <div
           style={{
             display: "flex",
@@ -131,34 +122,8 @@ const IndexPage = ({ data }: Contentful) => {
               <ProjectCard key={item.id} data={item} />
             ))}
           </ProjectContainer>
-
-          {/* <Swiper
-            // install Swiper modules
-            modules={[Navigation, Pagination, Scrollbar, A11y]}
-            spaceBetween={50}
-            slidesPerView={3}
-            navigation
-            pagination={{ clickable: true }}
-            scrollbar={{ draggable: true }}
-            onSwiper={(swiper) => console.log(swiper)}
-            onSlideChange={() => console.log("slide change")}
-          >
-            {filteredPosts.map((item: any) => (
-              <SwiperSlide>
-                <ProjectCard key={item.id} data={item} />
-              </SwiperSlide>
-            ))}
-            ...
-          </Swiper> */}
         </div>
       </main>
-      {/* <Swiper>
-        <SwiperSlide>
-          {({ isActive }) => (
-            <div>Current slide is {isActive ? "active" : "not active"}</div>
-          )}
-        </SwiperSlide>
-      </Swiper> */}
     </Layout>
   );
 };

@@ -42,24 +42,7 @@ const About = ({ data }: any) => {
           alignItems: "center",
         }}
       >
-        <div>
-          <h1>{posts.title}</h1>
-          {/* {image && (
-            <GatsbyImage
-              image={image}
-              alt=""
-              style={{
-                objectFit: "cover",
-                width: "200px",
-                height: "220px",
-                position: "absolute",
-                right: "0",
-                zIndex: "-1",
-              }}
-            />
-          )} */}
-        </div>
-
+        <h1>{posts.title}</h1>
         <InfoContainer>
           {documentToReactComponents(JSON.parse(posts.description.raw))}
           {documentToReactComponents(JSON.parse(posts.education.raw))}
