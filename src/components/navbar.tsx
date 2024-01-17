@@ -7,7 +7,7 @@ import Header from "./header";
 function NavBar() {
   const [showSearchContainer, setShowSearchContainer] = useState(false);
   const [smallScreenMenu, setSmallScreenMenu] = useState(
-    window.innerWidth > 768 ? false : true
+    typeof window !== "undefined" && window.innerWidth > 768 ? false : true
   );
   const [showHamburgerMenu, setShowHamburgerMenu] = useState(false);
   const [selectedLink, setSelectedLink] = useState(null);
@@ -30,7 +30,7 @@ function NavBar() {
 
   useEffect(() => {
     const handleResize = () => {
-      if (window.innerWidth > 768) {
+      if (typeof window !== "undefined" && window.innerWidth > 768) {
         setSmallScreenMenu(false);
       } else {
         setSmallScreenMenu(true);
