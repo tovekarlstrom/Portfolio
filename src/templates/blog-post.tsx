@@ -273,8 +273,6 @@ export const query = graphql`
         gatsbyImageData
       }
       link
-      githubLink
-      categories
     }
   }
 `;
