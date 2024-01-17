@@ -8,11 +8,11 @@ export const Footer = () => {
     >
       <div
         style={{
-          backgroundColor: "#CF6363",
+          backgroundColor: "#cf6363c4",
           maxWidth: "460px",
           marginRight: "50px",
-          height: "160px",
-          borderBottomRightRadius: "100px",
+          height: "60px",
+          borderTopRightRadius: "100px",
           display: "flex",
           alignItems: "end",
           padding: "20px",

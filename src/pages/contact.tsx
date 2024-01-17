@@ -41,33 +41,32 @@ export default function Contact({ data }: any) {
         <h1>{contactData.title}</h1>
         <div
           style={{
-            width: "300px",
-            height: "450px",
-            backgroundColor: "green",
-            position: "relative",
+            width: "80%",
           }}
-        ></div>
-
-        <InfoContainer>
-          <ArtSpan></ArtSpan>
-          <Hej>@</Hej>
-          <ProjectInfoContainer>
-            {" "}
-            {documentToReactComponents(JSON.parse(contactData.description.raw))}
-          </ProjectInfoContainer>
-        </InfoContainer>
+        >
+          <InfoContainer>
+            <ArtSpan></ArtSpan>
+            <Hej>@</Hej>
+            <ProjectInfoContainer>
+              {" "}
+              {documentToReactComponents(
+                JSON.parse(contactData.description.raw)
+              )}
+            </ProjectInfoContainer>
+          </InfoContainer>
+        </div>
 
         <div
           style={{
-            padding: "50px",
-            marginBottom: "200px",
-            marginTop: "100px",
+            // padding: "50px",
+            marginBottom: "250px",
+            marginTop: "150px",
             position: "relative",
-            maxWidth: "600px",
-            minWidth: "350px",
+            width: "80%",
+            // minWidth: "250px",
           }}
         >
-          <ArtSpanContainer top="0px" right="10px">
+          <ArtSpanContainer top="0px" right="0">
             <div
               style={{ position: "relative", width: "180px", height: "220px" }}
             >
@@ -125,12 +124,11 @@ const ArtSpanContainer = styled.div<{ top: string; right: string }>`
   position: absolute;
   top: ${(props) => props.top};
   right: ${(props) => props.right};
-  width: 100%;
 `;
 const ArtSpan = styled.div`
   position: absolute;
   bottom: 0;
-  left: 7%;
+  left: 0;
   width: 100px;
   height: 250px;
   border-top-left-radius: 50px;
@@ -157,8 +155,7 @@ const InfoContainer = styled.div`
   position: relative;
   display: flex;
   justify-content: space-around;
-  max-width: 600px;
-  min-width: 350px;
+  max-width: 500px;
 `;
 
 const LinkContainer = styled.div`

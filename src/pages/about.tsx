@@ -35,7 +35,13 @@ const About = ({ data }: any) => {
 
   return (
     <Layout>
-      <main>
+      <main
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+        }}
+      >
         <div>
           <h1>{posts.title}</h1>
           {/* {image && (
@@ -65,8 +71,20 @@ const About = ({ data }: any) => {
   );
 };
 const InfoContainer = styled.div`
-  padding: 5px;
+  padding: 10px;
+  margin: 20px 10px;
   max-width: 600px;
+  border-radius: 30px;
+
+  /* background: #333232; */
+  background: linear-gradient(
+    180deg,
+    rgba(207, 99, 99, 0.75) 33.26%,
+    #d7932d 100%
+  );
+
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+
   h2 {
     padding: 10px 0;
   }
