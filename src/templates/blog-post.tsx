@@ -15,7 +15,7 @@ import { GatsbyImage, IGatsbyImageData, getImage } from "gatsby-plugin-image";
 
 const Blog = ({ data }: any) => {
   const posts = data.contentfulProjects;
-  const [imageIndex, setImageIndex] = useState<IGatsbyImageData | null>(null);
+  const [imageIndex, setImageIndex] = useState(null);
   console.log("indexImage", imageIndex);
   //log posts
   console.log("posts", posts.images);
@@ -273,6 +273,7 @@ export const query = graphql`
         gatsbyImageData
       }
       link
+      categories
     }
   }
 `;
