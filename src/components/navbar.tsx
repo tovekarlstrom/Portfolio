@@ -85,8 +85,8 @@ function NavBar() {
                 <ListItem key={index} className="menu-item">
                   <Link
                     activeStyle={{
-                      borderBottom: "solid black 1.5px",
-                      borderRight: "solid black 1.5px",
+                      borderBottom: "solid white 1.5px",
+                      borderRight: "solid white 1.5px",
                       padding: "5px",
                     }}
                     to={link.link}
@@ -95,6 +95,9 @@ function NavBar() {
                   </Link>
                 </ListItem>
               ))}
+              <ListItem>
+                <Header />
+              </ListItem>
             </HamburgerMenuList>
           )}
         </nav>
@@ -106,8 +109,8 @@ function NavBar() {
               <ListItem key={index}>
                 <Link
                   activeStyle={{
-                    borderBottom: "solid black 1.5px",
-                    borderRight: "solid black 1.5px",
+                    borderBottom: "solid white 1.5px",
+                    borderRight: "solid white 1.5px",
                     padding: "5px",
                   }}
                   to={link.link}

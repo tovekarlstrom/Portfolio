@@ -83,11 +83,6 @@ export const ProjectCard = ({ data }: AllContentfulProjecs) => {
               }}
             />
           ) : (
-            // <img
-            //   style={{ width: "100%" }}
-            //   src={data.projectThumbnail.url}
-            //   alt=""
-            // />
             <ProjectTitleIcon>{data.projectTitle}</ProjectTitleIcon>
           )}
         </div>

@@ -65,7 +65,8 @@ const IndexPage = ({ data }: Contentful) => {
               alt=""
               style={{
                 objectFit: "cover",
-
+                width: "500px",
+                height: "520px",
                 position: "absolute",
                 right: "0",
                 top: "40%",
@@ -103,7 +104,7 @@ const InnerLeftContainer = styled.div`
   position: absolute;
   width: 60%;
   left: 10%;
-  z-index: 10;
+  z-index: 1;
   h1 {
     font-size: 30px !important;
   }

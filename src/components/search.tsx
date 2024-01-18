@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Index, DocumentStore } from "elasticlunr";
 import { Link } from "gatsby";
+import { Search } from "react-bootstrap-icons";
 
 interface SearchResult {
   slug: string;
@@ -9,7 +10,7 @@ interface SearchResult {
   categories: string[];
 }
 
-const Search = ({ searchIndex }: any) => {
+const SearchProject = ({ searchIndex }: any) => {
   const [query, setQuery] = useState("");
   const [results, setResults] = useState<SearchResult[]>([]);
 
@@ -28,7 +29,7 @@ const Search = ({ searchIndex }: any) => {
       );
     setResults(searchResults);
   };
-  console.log("hej", results);
+
   useEffect(() => {
     if (query.length >= 2) {
       // Perform the search only if the query length is at least three characters
@@ -40,23 +41,55 @@ const Search = ({ searchIndex }: any) => {
   }, [query]);
 
   return (
-    <div>
+    <div style={{ width: "100%", position: "relative" }}>
       <input
+        style={{ width: "100%" }}
         type="text"
         value={query}
         onChange={(evt) => setQuery(evt.target.value)}
       />
-      <ul>
+      <Search
+        style={{
+          color: "black",
+          fontSize: "15px",
+          position: "absolute",
+          right: "0px",
+          top: "6px",
+        }}
+      />
+      <ul style={{ width: "100%", padding: "0" }}>
         {results.map((page) => (
-          <li style={{ cursor: "pointer" }} key={page.id}>
+          <li
+            style={{
+              cursor: "pointer",
+              fontSize: "14px",
+              padding: "6px 0px 3px 0px",
+              listStyle: "none",
+            }}
+            key={page.id}
+          >
             <Link to={`/projects/${page.slug}`}>{page.projectTitle}</Link>
 
-            <p>{page.categories.toString()}</p>
+            <p style={{ paddingLeft: "2px", fontSize: "12px" }}>
+              {page.categories.toString()}
+            </p>
           </li>
         ))}
+        {results.length === 0 && query.length >= 2 && (
+          <li
+            style={{
+              cursor: "pointer",
+              fontSize: "14px",
+              padding: "6px 0px 3px 0px",
+              listStyle: "none",
+            }}
+          >
+            No search result
+          </li>
+        )}
       </ul>
     </div>
   );
 };
 
-export default Search;
+export default SearchProject;

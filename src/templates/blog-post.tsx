@@ -24,15 +24,24 @@ const Blog = ({ data }: any) => {
     <Layout>
       <Container blurBackground={imageIndex !== null}>
         <ProjectTitle>{posts.projectTitle}</ProjectTitle>
-        <InfoContainer>
-          <ArtSpan></ArtSpan>
-          <Hej>{posts.categories.join(", ")}</Hej>
-          <ProjectInfoContainer>
-            {documentToReactComponents(
-              JSON.parse(posts.projectDescription.raw)
-            )}
-          </ProjectInfoContainer>
-        </InfoContainer>
+        <div
+          style={{
+            position: "absolute",
+            left: "10%",
+            top: "300px",
+            width: "100%",
+          }}
+        >
+          <InfoContainer>
+            <ArtSpan></ArtSpan>
+            <Category>{posts.categories.join(", ")}</Category>
+            <ProjectInfoContainer>
+              {documentToReactComponents(
+                JSON.parse(posts.projectDescription.raw)
+              )}
+            </ProjectInfoContainer>
+          </InfoContainer>
+        </div>
 
         <div style={{ width: "360px", margin: "0!" }}>
           <Swiper
@@ -71,34 +80,12 @@ const Blog = ({ data }: any) => {
                       <GatsbyImage
                         image={item.gatsbyImageData}
                         alt=""
-                        // onClick={() => setImageIndex(item.gatsbyImageData)}
                         imgStyle={{
                           width: "100%",
                           height: "100%",
                         }}
                       />
                     )}
-                    {/* <img
-                      onClick={() => setImageIndex(item.url)}
-                      key={item.url}
-                      style={{
-                        width: "100%",
-                        height: "100%",
-                      }}
-                      src={item.url}
-                      alt=""
-                    /> */}
-                    {/* <div
-                      style={{
-                        display: "flex",
-                        justifyContent: "center",
-                        height: "40px",
-                        alignItems: "center",
-                      }}
-                    >
-                      <p style={{ color: "#CF6363" }}>View</p>
-                        <CaretRight color="#CF6363" />
-                    </div> */}
                   </div>
                 </SwiperSlide>
               ))}
@@ -199,6 +186,7 @@ const ProjectTitle = styled.h1`
   margin: 20px;
   margin-top: 100px;
   font-size: 40px;
+  margin-bottom: 600px;
 `;
 
 const Container = styled.div<{ blurBackground: boolean }>`
@@ -208,6 +196,7 @@ const Container = styled.div<{ blurBackground: boolean }>`
   justify-content: center;
   flex-direction: column;
   align-items: center;
+  position: relative;
 `;
 
 const InnerContainer = styled.div`
@@ -227,24 +216,24 @@ const ImageOverlay = styled.div`
 const ArtSpan = styled.div`
   position: absolute;
   bottom: 0;
-  left: 10%;
-  width: 200px;
-  height: 300px;
+  left: 0;
+  width: 60px;
+  height: 100%;
   border-top-left-radius: 50px;
   background-color: #d7932d;
 `;
-const Hej = styled.p`
+const Category = styled.p`
   padding: 30px;
   max-width: 200px;
   position: absolute;
-  bottom: -10px;
-  left: 20%;
+  bottom: -17px;
+  left: 20px;
   background-color: rgba(237, 207, 120, 0.75);
 `;
 const ProjectInfoContainer = styled.div`
   position: absolute;
-  bottom: 40%;
-  left: 27%;
+  bottom: 20%;
+  left: 70px;
   max-width: 70%;
   min-width: 55%;
 `;
