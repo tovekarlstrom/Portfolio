@@ -59,12 +59,12 @@ const InfoContainer = styled.div`
   max-width: 600px;
   border-radius: 30px;
 
-  /* background: #333232; */
-  background: linear-gradient(
+  background: #333232;
+  /* background: linear-gradient(
     180deg,
     rgba(207, 99, 99, 0.75) 33.26%,
     #d7932d 100%
-  );
+  ); */
 
   box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
 

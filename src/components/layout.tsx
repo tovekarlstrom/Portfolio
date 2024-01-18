@@ -3,6 +3,7 @@ import { useStaticQuery, graphql, HeadFC } from "gatsby";
 import NavBar from "./navbar";
 import { Footer } from "./footer";
 import "../style.css";
+import Head from "./head";
 
 const Layout = ({ title, children }: any) => {
   const data = useStaticQuery(graphql`
@@ -17,12 +18,7 @@ const Layout = ({ title, children }: any) => {
 
   return (
     <>
-      <head>
-        <html lang="en" />
-        <meta name="description" content="Portfolio page"></meta>
-        <title>Portfolio</title>
-        <link rel="canonical" href="http://mysite.com/example" />
-      </head>
+      <Head />
 
       <NavBar />
 
@@ -33,12 +29,3 @@ const Layout = ({ title, children }: any) => {
 };
 
 export default Layout;
-export const Head: HeadFC = () => (
-  <head>
-    <title>Home Page</title>
-    <link
-      href="https://fonts.googleapis.com/css2?family=Raleway&display=swap"
-      rel="stylesheet"
-    />
-  </head>
-);

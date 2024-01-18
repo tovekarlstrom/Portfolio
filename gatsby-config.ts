@@ -8,7 +8,7 @@ if (process.env.NODE_ENV !== "production") {
 const config: GatsbyConfig = {
   siteMetadata: {
     title: `portfolio-headless-cms`,
-    siteUrl: `https://www.yourdomain.tld`,
+    siteUrl: `https://tovekarlstrom.netlify.app/`,
     menuLinks: [
       {
         name: "Home",

@@ -8,7 +8,7 @@ export const Footer = () => {
     >
       <div
         style={{
-          backgroundColor: "#cf6363c4",
+          backgroundColor: "#333232",
           maxWidth: "460px",
           marginRight: "50px",
           height: "60px",

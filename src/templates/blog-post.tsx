@@ -205,10 +205,11 @@ const InnerContainer = styled.div`
 const ImageOverlay = styled.div`
   position: absolute;
   top: 50%;
-  margin: 10%;
+  margin: auto;
   padding: 27px;
   background-color: #333232; /* Set the background color of the overlay */
-  width: 80%; /* Adjust the width of the overlay as needed */
+
+  object-fit: cover;
 
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); /* Add a shadow to the overlay */
 `;
@@ -234,7 +235,7 @@ const ProjectInfoContainer = styled.div`
   position: absolute;
   bottom: 20%;
   left: 70px;
-  max-width: 70%;
+  max-width: 50%;
   min-width: 55%;
 `;
 const InfoContainer = styled.div`

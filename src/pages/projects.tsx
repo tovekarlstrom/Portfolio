@@ -100,7 +100,7 @@ const IndexPage = ({ data }: Contentful) => {
             <ArtSpanBottom></ArtSpanBottom>
           </div>
         </ArtSpanContainer>
-        <div
+        <section
           style={{
             display: "flex",
             justifyContent: "center",
@@ -109,7 +109,11 @@ const IndexPage = ({ data }: Contentful) => {
             alignItems: "center",
           }}
         >
-          <SelectCategory onChange={(e) => setCategoryData(e.target.value)}>
+          <label htmlFor="category">Category</label>
+          <SelectCategory
+            id="category"
+            onChange={(e) => setCategoryData(e.target.value)}
+          >
             <option value="All">All</option>
             {allCategories.map((category: any, index) => (
               <option key={category} value={category}>
@@ -122,7 +126,7 @@ const IndexPage = ({ data }: Contentful) => {
               <ProjectCard key={item.id} data={item} />
             ))}
           </ProjectContainer>
-        </div>
+        </section>
       </main>
     </Layout>
   );
