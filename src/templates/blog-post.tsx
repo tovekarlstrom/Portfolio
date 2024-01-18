@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { X, CaretRight } from "react-bootstrap-icons";
 import { Link, graphql } from "gatsby";
 import { documentToReactComponents } from "@contentful/rich-text-react-renderer";
@@ -16,10 +16,28 @@ import { GatsbyImage, IGatsbyImageData, getImage } from "gatsby-plugin-image";
 const Blog = ({ data }: any) => {
   const posts = data.contentfulProjects;
   const [imageIndex, setImageIndex] = useState(null);
-  console.log("indexImage", imageIndex);
-  //log posts
-  console.log("posts", posts.images);
+  const [smallScreenMenu, setSmallScreenMenu] = useState(
+    typeof window !== "undefined" && window.innerWidth > 890 ? false : true
+  );
+
   const image = getImage(data.contentfulProjects.images);
+  useEffect(() => {
+    const handleResize = () => {
+      if (typeof window !== "undefined" && window.innerWidth > 890) {
+        setSmallScreenMenu(false);
+      } else {
+        setSmallScreenMenu(true);
+      }
+    };
+
+    // Add event listener
+    window.addEventListener("resize", handleResize);
+
+    // Clean up the event listener on component unmount
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
   return (
     <Layout>
       <main>
@@ -42,17 +60,22 @@ const Blog = ({ data }: any) => {
             </InfoContainer>
           </div>
 
-          <div style={{ width: "360px", margin: "0!" }}>
+          <div
+            style={{
+              width: `${smallScreenMenu ? "360px" : "600px"}`,
+              margin: "0!",
+            }}
+          >
             <Swiper
               // install Swiper modules
               modules={[Navigation, Pagination, Scrollbar, A11y]}
-              spaceBetween={50}
+              spaceBetween={0}
               slidesPerView={1}
               navigation
               centeredSlides={true} // Center the active slide
               centeredSlidesBounds={true} // Center the slide within bounds
               pagination={{ clickable: true }}
-              scrollbar={{ draggable: true }}
+              // scrollbar={{ draggable: true }}
               onSwiper={(swiper) => console.log(swiper)}
               onSlideChange={() => console.log("slide change")}
             >
@@ -66,12 +89,14 @@ const Blog = ({ data }: any) => {
                       style={{
                         padding: "20px",
                         cursor: "pointer",
+                        width: `${smallScreenMenu ? "200px" : "400px"}`,
+                        height: `${smallScreenMenu ? "200px" : "400px"}`,
 
-                        width: "200px",
-                        height: "200px",
                         objectFit: "cover",
                         backgroundColor: "#333232",
                         margin: "50px",
+                        marginLeft: `${smallScreenMenu ? "60px" : "90px"}`,
+
                         boxShadow: "0px 4px 4px 0px rgba(0, 0, 0, 0.25)",
                       }}
                     >
@@ -205,12 +230,19 @@ const Container = styled.div<{ blurBackground: boolean }>`
 
 const ImageOverlay = styled.div`
   position: absolute;
-  top: 50%;
-  margin: auto;
+  top: 60%;
+  left: 5%;
+  right: 5%;
+  max-width: 90%;
   padding: 27px;
   background-color: #333232;
   object-fit: cover;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  @media (min-width: 768px) {
+    left: 20%;
+    right: 20%;
+    max-width: 60%;
+  }
 `;
 
 const ArtSpan = styled.div`
