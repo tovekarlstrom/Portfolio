@@ -87,7 +87,7 @@ function NavBar() {
                     activeStyle={{
                       borderBottom: "solid white 1.5px",
                       borderRight: "solid white 1.5px",
-                      padding: "5px",
+                      padding: "0 5px 5px 0",
                     }}
                     to={link.link}
                   >
@@ -122,17 +122,29 @@ function NavBar() {
             <ListItem>
               {showSearchContainer ? (
                 <X
+                  cursor={"pointer"}
+                  fontSize={"24px"}
                   onClick={() => setShowSearchContainer(!showSearchContainer)}
                 />
               ) : (
                 <Search
+                  cursor={"pointer"}
                   onClick={() => setShowSearchContainer(!showSearchContainer)}
                 />
               )}
             </ListItem>
           </NavBarList>
           {showSearchContainer && (
-            <div>
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "right",
+                padding: "5px 50px",
+                backgroundColor: "#272626",
+                height: "200px",
+                boxShadow: "0px 4px 4px 0px rgba(0, 0, 0, 0.25)",
+              }}
+            >
               <Header />
             </div>
           )}

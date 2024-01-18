@@ -33,6 +33,7 @@ export const query = graphql`
         }
         projectThumbnail {
           gatsbyImageData
+          description
         }
       }
     }
@@ -53,6 +54,7 @@ interface Contentful {
           };
           projectThumbnail: {
             gatsbyImageData: any;
+            description: string;
           };
         }
       ];
@@ -109,18 +111,19 @@ const IndexPage = ({ data }: Contentful) => {
             alignItems: "center",
           }}
         >
-          <label htmlFor="category">Category</label>
-          <SelectCategory
-            id="category"
-            onChange={(e) => setCategoryData(e.target.value)}
-          >
-            <option value="All">All</option>
-            {allCategories.map((category: any, index) => (
-              <option key={category} value={category}>
-                {category}
-              </option>
-            ))}
-          </SelectCategory>
+          <label htmlFor="category">
+            <SelectCategory
+              id="category"
+              onChange={(e) => setCategoryData(e.target.value)}
+            >
+              <option value="All">All</option>
+              {allCategories.map((category: any, index) => (
+                <option key={category} value={category}>
+                  {category}
+                </option>
+              ))}
+            </SelectCategory>
+          </label>
           <ProjectContainer>
             {filteredPosts.map((item: any) => (
               <ProjectCard key={item.id} data={item} />
@@ -195,5 +198,6 @@ const SelectCategory = styled.select`
   line-height: normal;
   color: #f5f5f5;
   padding: 10px;
+  cursor: pointer;
 `;
 export default IndexPage;

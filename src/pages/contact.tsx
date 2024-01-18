@@ -15,6 +15,7 @@ export const query = graphql`
       }
       image {
         gatsbyImageData
+        description
       }
       link {
         raw
@@ -46,7 +47,7 @@ export default function Contact({ data }: any) {
         >
           <InfoContainer>
             <ArtSpan></ArtSpan>
-            <Hej>@</Hej>
+            <SmallArtSpan>@</SmallArtSpan>
             <ProjectInfoContainer>
               {" "}
               {documentToReactComponents(
@@ -76,7 +77,7 @@ export default function Contact({ data }: any) {
                 {image && (
                   <GatsbyImage
                     image={image}
-                    alt=""
+                    alt={contactData.image.description}
                     style={{
                       objectFit: "cover",
                       width: "70px",
@@ -132,12 +133,13 @@ const ArtSpan = styled.div`
   border-top-left-radius: 50px;
   background-color: #d7932d;
 `;
-const Hej = styled.p`
-  padding: 30px;
+const SmallArtSpan = styled.p`
+  padding: 20px;
   max-width: 200px;
   position: absolute;
   bottom: -10px;
   left: 17%;
+  font-size: 30px;
   background-color: rgba(237, 207, 120, 0.75);
 `;
 const ProjectInfoContainer = styled.div`
@@ -159,6 +161,6 @@ const InfoContainer = styled.div`
 const LinkContainer = styled.div`
   position: absolute;
   bottom: 30%;
-  left: 0;
+  left: -20px;
   z-index: 10;
 `;

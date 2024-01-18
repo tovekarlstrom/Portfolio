@@ -22,125 +22,128 @@ const Blog = ({ data }: any) => {
   const image = getImage(data.contentfulProjects.images);
   return (
     <Layout>
-      <Container blurBackground={imageIndex !== null}>
-        <ProjectTitle>{posts.projectTitle}</ProjectTitle>
-        <div
-          style={{
-            position: "absolute",
-            left: "10%",
-            top: "300px",
-            width: "100%",
-          }}
-        >
-          <InfoContainer>
-            <ArtSpan></ArtSpan>
-            <Category>{posts.categories.join(", ")}</Category>
+      <main>
+        <Container blurBackground={imageIndex !== null}>
+          <ProjectTitle>{posts.projectTitle}</ProjectTitle>
+          <div
+            style={{
+              position: "relative",
+              margin: "100px 10% 200px 10%",
+            }}
+          >
             <ProjectInfoContainer>
               {documentToReactComponents(
                 JSON.parse(posts.projectDescription.raw)
               )}
             </ProjectInfoContainer>
-          </InfoContainer>
-        </div>
+            <InfoContainer>
+              <ArtSpan></ArtSpan>
+              <Category>{posts.categories.join(", ")}</Category>
+            </InfoContainer>
+          </div>
 
-        <div style={{ width: "360px", margin: "0!" }}>
-          <Swiper
-            // install Swiper modules
-            modules={[Navigation, Pagination, Scrollbar, A11y]}
-            spaceBetween={50}
-            slidesPerView={1}
-            navigation
-            centeredSlides={true} // Center the active slide
-            centeredSlidesBounds={true} // Center the slide within bounds
-            pagination={{ clickable: true }}
-            scrollbar={{ draggable: true }}
-            onSwiper={(swiper) => console.log(swiper)}
-            onSlideChange={() => console.log("slide change")}
-          >
-            {posts.images &&
-              posts.images.map((item: any, index: string) => (
-                <SwiperSlide
-                  key={index}
-                  onClick={() => setImageIndex(item.gatsbyImageData)}
-                >
-                  <div
-                    style={{
-                      padding: "20px",
-                      cursor: "pointer",
-
-                      width: "200px",
-                      height: "200px",
-                      objectFit: "cover",
-                      backgroundColor: "#333232",
-                      margin: "50px",
-                      boxShadow: "0px 4px 4px 0px rgba(0, 0, 0, 0.25)",
-                    }}
-                  >
-                    {item && (
-                      <GatsbyImage
-                        image={item.gatsbyImageData}
-                        alt=""
-                        imgStyle={{
-                          width: "100%",
-                          height: "100%",
-                        }}
-                      />
-                    )}
-                  </div>
-                </SwiperSlide>
-              ))}
-            ...
-          </Swiper>
-        </div>
-
-        <LinkToProject>
-          <Link to={posts.link}>Link to the publiched project</Link>
-          <ArtSpanContainer top="70px" right="40px">
-            <div
-              style={{ position: "relative", width: "180px", height: "220px" }}
+          <div style={{ width: "360px", margin: "0!" }}>
+            <Swiper
+              // install Swiper modules
+              modules={[Navigation, Pagination, Scrollbar, A11y]}
+              spaceBetween={50}
+              slidesPerView={1}
+              navigation
+              centeredSlides={true} // Center the active slide
+              centeredSlidesBounds={true} // Center the slide within bounds
+              pagination={{ clickable: true }}
+              scrollbar={{ draggable: true }}
+              onSwiper={(swiper) => console.log(swiper)}
+              onSlideChange={() => console.log("slide change")}
             >
-              <ArtSpanTop></ArtSpanTop>
-              <ArtSpanBottom></ArtSpanBottom>
-            </div>
-          </ArtSpanContainer>
-        </LinkToProject>
-      </Container>
-      {imageIndex !== null && (
-        <ImageOverlay>
-          <div style={{ position: "absolute" }}></div>
-          <X
-            onClick={() => setImageIndex(null)}
-            style={{
-              cursor: "pointer",
-              fontSize: "30px",
-              objectFit: "cover",
-              position: "absolute",
-              top: "2px",
-              right: "2px",
-              color: "white",
-            }}
-          />
+              {posts.images &&
+                posts.images.map((item: any, index: string) => (
+                  <SwiperSlide
+                    key={index}
+                    onClick={() => setImageIndex(item.gatsbyImageData)}
+                  >
+                    <div
+                      style={{
+                        padding: "20px",
+                        cursor: "pointer",
 
-          {/* <img style={{ width: "100%" }} src={imageIndex} alt="" /> */}
-          {imageIndex && (
-            <GatsbyImage
-              image={imageIndex}
-              alt=""
-              imgStyle={{
-                width: "100%",
-                height: "100%",
-                zIndex: "20",
+                        width: "200px",
+                        height: "200px",
+                        objectFit: "cover",
+                        backgroundColor: "#333232",
+                        margin: "50px",
+                        boxShadow: "0px 4px 4px 0px rgba(0, 0, 0, 0.25)",
+                      }}
+                    >
+                      {item && (
+                        <GatsbyImage
+                          image={item.gatsbyImageData}
+                          alt={item.description}
+                          imgStyle={{
+                            width: "100%",
+                            height: "100%",
+                          }}
+                        />
+                      )}
+                    </div>
+                  </SwiperSlide>
+                ))}
+              ...
+            </Swiper>
+          </div>
+
+          <LinkToProject>
+            <Link to={posts.link}>Link to the publiched project</Link>
+            <ArtSpanContainer top="70px" right="40px">
+              <div
+                style={{
+                  position: "relative",
+                  width: "180px",
+                  height: "220px",
+                }}
+              >
+                <ArtSpanTop></ArtSpanTop>
+                <ArtSpanBottom></ArtSpanBottom>
+              </div>
+            </ArtSpanContainer>
+          </LinkToProject>
+        </Container>
+        {imageIndex !== null && (
+          <ImageOverlay>
+            <div style={{ position: "absolute" }}></div>
+            <X
+              onClick={() => setImageIndex(null)}
+              style={{
+                cursor: "pointer",
+                fontSize: "30px",
+                objectFit: "cover",
+                position: "absolute",
+                top: "2px",
+                right: "2px",
+                color: "white",
               }}
             />
-          )}
-        </ImageOverlay>
-      )}
+
+            {imageIndex && (
+              <GatsbyImage
+                image={imageIndex}
+                alt="showing the same image but larger in a modal"
+                imgStyle={{
+                  width: "100%",
+                  height: "100%",
+                  zIndex: "20",
+                }}
+              />
+            )}
+          </ImageOverlay>
+        )}
+      </main>
     </Layout>
   );
 };
 export default Blog;
 const LinkToProject = styled.div`
-  width: 100%;
+  width: 90%;
   padding-left: 32px;
   /* padding-right: 32px; */
   position: relative;
@@ -186,7 +189,7 @@ const ProjectTitle = styled.h1`
   margin: 20px;
   margin-top: 100px;
   font-size: 40px;
-  margin-bottom: 600px;
+  /* margin-bottom: 600px; */
 `;
 
 const Container = styled.div<{ blurBackground: boolean }>`
@@ -197,54 +200,48 @@ const Container = styled.div<{ blurBackground: boolean }>`
   flex-direction: column;
   align-items: center;
   position: relative;
+  width: 100%;
 `;
 
-const InnerContainer = styled.div`
-  position: relative;
-`;
 const ImageOverlay = styled.div`
   position: absolute;
   top: 50%;
   margin: auto;
   padding: 27px;
-  background-color: #333232; /* Set the background color of the overlay */
-
+  background-color: #333232;
   object-fit: cover;
-
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); /* Add a shadow to the overlay */
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
 `;
 
 const ArtSpan = styled.div`
   position: absolute;
   bottom: 0;
-  left: 0;
+  left: -10%;
   width: 60px;
   height: 100%;
   border-top-left-radius: 50px;
   background-color: #d7932d;
 `;
 const Category = styled.p`
-  padding: 30px;
+  padding: 20px;
   max-width: 200px;
   position: absolute;
-  bottom: -17px;
-  left: 20px;
+  bottom: -40px;
+  left: -5%;
   background-color: rgba(237, 207, 120, 0.75);
 `;
 const ProjectInfoContainer = styled.div`
-  position: absolute;
-  bottom: 20%;
-  left: 70px;
-  max-width: 50%;
-  min-width: 55%;
+  padding: 30px;
+  z-index: 11;
+  background: #333232;
+  max-width: 600px;
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+  position: relative;
 `;
 const InfoContainer = styled.div`
-  padding-top: 300px;
-  padding-bottom: 100px;
-  position: relative;
-  display: flex;
-  justify-content: space-around;
-  width: 100%;
+  padding-top: 55px;
+
+  width: 50%;
 `;
 
 export const query = graphql`
@@ -256,10 +253,9 @@ export const query = graphql`
       projectDescription {
         raw
       }
-      projectThumbnail {
-        gatsbyImageData
-      }
+
       images {
+        description
         gatsbyImageData
       }
       link

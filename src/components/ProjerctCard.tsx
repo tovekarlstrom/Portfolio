@@ -3,46 +3,21 @@ import { Link, graphql } from "gatsby";
 import styled from "@emotion/styled";
 import { GatsbyImage, getImage } from "gatsby-plugin-image";
 
-export const query = graphql`
-  query MyQuery {
-    allContentfulProjects {
-      nodes {
-        id
-        slug
-        projectTitle
-        projectDescription {
-          raw
-        }
-        categories
-        projectImages {
-          url
-        }
-        projectThumbnail {
-          gatsbyImageData
-        }
-      }
-    }
-  }
-`;
-
 interface AllContentfulProjecs {
   data: {
     id: string;
     slug: string;
     projectTitle: string;
-    projectDescription: { row: string };
     categories: string[];
-    projectImages: {
-      url: string;
-    };
     projectThumbnail: {
+      description: string;
       gatsbyImageData: any;
     };
   };
 }
 export const ProjectCard = ({ data }: AllContentfulProjecs) => {
   const image = getImage(data.projectThumbnail.gatsbyImageData);
-
+  console.log("data", data);
   return (
     <Link
       to={data.slug}
@@ -75,7 +50,7 @@ export const ProjectCard = ({ data }: AllContentfulProjecs) => {
           {image ? (
             <GatsbyImage
               image={image}
-              alt=""
+              alt={data.projectThumbnail.description}
               style={{
                 width: "260px",
                 height: "264px",
@@ -88,7 +63,7 @@ export const ProjectCard = ({ data }: AllContentfulProjecs) => {
         </div>
         <div style={{ width: "260px" }}>
           <ProjectTitle>{data.projectTitle}</ProjectTitle>
-          <ProjectLang>{data.categories[0]}</ProjectLang>
+          <ProjectLang>{data.categories.join(", ")}</ProjectLang>
         </div>
       </div>
     </Link>

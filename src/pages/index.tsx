@@ -17,6 +17,7 @@ export const query = graphql`
       }
       image {
         gatsbyImageData
+        description
       }
     }
   }
@@ -31,6 +32,7 @@ interface Contentful {
       };
       image: {
         gatsbyImageData: any;
+        description: string;
       };
     };
   };
@@ -60,19 +62,16 @@ const IndexPage = ({ data }: Contentful) => {
             )}
           </InnerLeftContainer>
           {image && (
-            <GatsbyImage
-              image={image}
-              alt=""
-              style={{
-                objectFit: "cover",
-                width: "500px",
-                height: "520px",
-                position: "absolute",
-                right: "0",
-                top: "40%",
-                zIndex: "0",
-              }}
-            />
+            <ImageConteiner>
+              <GatsbyImage
+                style={{
+                  width: "100%",
+                  height: "100%",
+                }}
+                image={image}
+                alt={frontPageData.image.description}
+              />
+            </ImageConteiner>
           )}
         </UpperContainer>
       </main>
@@ -85,43 +84,40 @@ const UpperContainer = styled.div`
   position: relative;
   height: 50vh;
   width: 100%;
-  margin-top: 30px;
-  img {
-    width: 500px;
-    height: 520px;
-  }
+`;
+const ImageConteiner = styled.div`
+  position: absolute;
+  z-index: -10;
+  right: 0;
+  top: 40%;
 
-  @media (min-width: 768px) {
-    margin-top: 170px;
-    img {
-      width: 700px;
-      height: 730px;
-    }
+  height: 730px;
+
+  @media (min-width: 659px) {
+    width: 700px;
+    height: 730px;
+    top: 30%;
   }
 `;
 
 const InnerLeftContainer = styled.div`
   position: absolute;
-  width: 60%;
+
   left: 10%;
   z-index: 1;
   h1 {
     font-size: 30px !important;
+    padding-bottom: 30px;
   }
-  h2 {
-    margin-top: 50px;
-    font-size: 20px;
-    font-weight: 600;
+  p {
+    font-size: 19px;
   }
 
   @media (min-width: 768px) {
+    width: 60%;
     h1 {
+      margin-top: 50px;
       font-size: 52px;
-    }
-    h2 {
-      margin-top: 100px;
-      font-size: 30px;
-      font-weight: 400;
     }
   }
 `;

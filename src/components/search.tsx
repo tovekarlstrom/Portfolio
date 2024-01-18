@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Index, DocumentStore } from "elasticlunr";
 import { Link } from "gatsby";
 import { Search } from "react-bootstrap-icons";
+import styled from "@emotion/styled";
 
 interface SearchResult {
   slug: string;
@@ -42,43 +43,38 @@ const SearchProject = ({ searchIndex }: any) => {
 
   return (
     <div style={{ width: "100%", position: "relative" }}>
-      <input
-        style={{ width: "100%" }}
-        type="text"
-        value={query}
-        onChange={(evt) => setQuery(evt.target.value)}
-      />
+      <label htmlFor="search">
+        <input
+          id="search"
+          style={{ width: "100%", height: "27px", borderRadius: "5px" }}
+          type="text"
+          value={query}
+          placeholder="Search..."
+          onChange={(evt) => setQuery(evt.target.value)}
+        />
+      </label>
       <Search
         style={{
           color: "black",
-          fontSize: "15px",
+          fontSize: "16px",
           position: "absolute",
           right: "0px",
-          top: "6px",
+          top: "8px",
         }}
       />
       <ul style={{ width: "100%", padding: "0" }}>
-        {results.map((page) => (
-          <li
-            style={{
-              cursor: "pointer",
-              fontSize: "14px",
-              padding: "6px 0px 3px 0px",
-              listStyle: "none",
-            }}
-            key={page.id}
-          >
-            <Link to={`/projects/${page.slug}`}>{page.projectTitle}</Link>
+        {results.map((project) => (
+          <StyledLi key={project.id}>
+            <Link to={`/projects/${project.slug}`}>{project.projectTitle}</Link>
 
             <p style={{ paddingLeft: "2px", fontSize: "12px" }}>
-              {page.categories.toString()}
+              {project.categories.toString()}
             </p>
-          </li>
+          </StyledLi>
         ))}
         {results.length === 0 && query.length >= 2 && (
           <li
             style={{
-              cursor: "pointer",
               fontSize: "14px",
               padding: "6px 0px 3px 0px",
               listStyle: "none",
@@ -91,5 +87,16 @@ const SearchProject = ({ searchIndex }: any) => {
     </div>
   );
 };
+const StyledLi = styled.li`
+  cursor: pointer;
+  font-size: 14px;
+  padding: 6px 0px 3px 0px;
+  list-style: none;
+  letter-spacing: 0.7px;
+
+  &:hover {
+    font-weight: 700;
+  }
+`;
 
 export default SearchProject;
