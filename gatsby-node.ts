@@ -1,7 +1,7 @@
 import { GatsbyNode } from "gatsby";
 import path from "path";
 
-exports.createPages = async ({ graphql, actions, reporter }) => {
+exports.createPages = async ({ graphql, actions, reporter }: any) => {
   const { createPage } = actions;
   // Define a template for blog post
   const blogPost = path.resolve("./src/templates/blog-post.tsx");
