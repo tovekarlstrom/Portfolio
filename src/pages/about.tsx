@@ -29,9 +29,7 @@ export const query = graphql`
   }
 `;
 const About = ({ data }: any) => {
-  const siteTitle = `Title`;
   const posts = data.contentfulAbout;
-  const image = getImage(data.contentfulAbout.portrait);
 
   return (
     <Layout>
@@ -44,9 +42,11 @@ const About = ({ data }: any) => {
       >
         <h1>{posts.title}</h1>
         <InfoContainer>
-          {documentToReactComponents(JSON.parse(posts.description.raw))}
-          {documentToReactComponents(JSON.parse(posts.education.raw))}
-          {documentToReactComponents(JSON.parse(posts.experience.raw))}
+          <InnerContainer>
+            {documentToReactComponents(JSON.parse(posts.description.raw))}
+            {documentToReactComponents(JSON.parse(posts.education.raw))}
+            {documentToReactComponents(JSON.parse(posts.experience.raw))}
+          </InnerContainer>
           {documentToReactComponents(JSON.parse(posts.skills.raw))}
         </InfoContainer>
       </main>
@@ -57,22 +57,22 @@ const InfoContainer = styled.div`
   padding: 10px;
   margin: 20px 10px;
   max-width: 600px;
-  border-radius: 30px;
-
-  background: #333232;
-  /* background: linear-gradient(
-    180deg,
-    rgba(207, 99, 99, 0.75) 33.26%,
-    #d7932d 100%
-  ); */
-
   box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
-
+  border-radius: 30px;
+  background-color: #333232;
+  p {
+    padding: 3px;
+  }
   h2 {
     padding: 10px 0;
   }
   p {
     padding-left: 5px;
+  }
+`;
+const InnerContainer = styled.span`
+  p {
+    padding: 10px;
   }
 `;
 export default About;

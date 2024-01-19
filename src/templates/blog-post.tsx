@@ -118,7 +118,7 @@ const Blog = ({ data }: any) => {
           </div>
 
           <LinkToProject>
-            <Link to={posts.link}>Link to the publiched project</Link>
+            {documentToReactComponents(JSON.parse(posts.links.raw))}
             <ArtSpanContainer top="70px" right="40px">
               <div
                 style={{
@@ -292,6 +292,9 @@ export const query = graphql`
       }
       link
       categories
+      links {
+        raw
+      }
     }
   }
 `;
