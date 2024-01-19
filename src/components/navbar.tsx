@@ -30,14 +30,17 @@ function NavBar() {
 
   useEffect(() => {
     const handleResize = () => {
+      // Check if window is defined and its width is greater than 768 pixels
       if (typeof window !== "undefined" && window.innerWidth > 768) {
+        // If true, set smallScreenMenu to false
         setSmallScreenMenu(false);
       } else {
+        // If false, set smallScreenMenu to true
         setSmallScreenMenu(true);
       }
     };
 
-    // Add event listener
+    // Add event listener for resize events
     window.addEventListener("resize", handleResize);
 
     // Clean up the event listener on component unmount

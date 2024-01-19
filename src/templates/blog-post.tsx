@@ -19,25 +19,30 @@ const Blog = ({ data }: any) => {
   const [smallScreenMenu, setSmallScreenMenu] = useState(
     typeof window !== "undefined" && window.innerWidth > 890 ? false : true
   );
-
   const image = getImage(data.contentfulProjects.images);
+
+  // useEffect to handle window resize events
   useEffect(() => {
+    // Function to handle resize events
     const handleResize = () => {
+      // Check if window is defined and its width is greater than 890 pixels
       if (typeof window !== "undefined" && window.innerWidth > 890) {
+        // If true, set smallScreenMenu to false
         setSmallScreenMenu(false);
       } else {
+        // If false, set smallScreenMenu to true
         setSmallScreenMenu(true);
       }
     };
 
-    // Add event listener
+    // Add event listener for resize events
     window.addEventListener("resize", handleResize);
 
     // Clean up the event listener on component unmount
     return () => {
       window.removeEventListener("resize", handleResize);
     };
-  }, []);
+  }, []); // Empty dependency array indicates this effect runs once on mount
   return (
     <Layout>
       <main>

@@ -67,14 +67,19 @@ const IndexPage = ({ data }: Contentful) => {
 
   const [categoryData, setCategoryData] = useState("All");
 
+  // Extract all unique categories from the projectData array of posts
   const allCategories = Array.from(
     new Set(projectData.flatMap((post: any) => post.categories))
   );
 
+  // Filter posts based on selected categoryData: show all posts if "All" is chosen,
+  // otherwise, return posts that include the selected category
   const filteredPosts = projectData.filter((post: any) => {
     if (categoryData === "All") {
+      // Return all posts when "All" is selected
       return projectData;
     } else {
+      // Return posts that include the selected category
       return post.categories.includes(categoryData);
     }
   });

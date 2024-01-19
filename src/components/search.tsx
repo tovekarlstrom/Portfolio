@@ -17,17 +17,24 @@ const SearchProject = ({ searchIndex }: any) => {
 
   let index: Index<SearchResult> | null = null;
 
+  // Function to get or create the search index
   const getOrCreateIndex = () =>
     index ? index : Index.load<SearchResult>(searchIndex);
 
+  // Function to perform search based on the provided query
   const performSearch = (searchQuery: string) => {
+    // Update index by either using the existing one or loading a new one
     index = getOrCreateIndex();
+
+    // Perform search and map results to SearchResult type
     const searchResults = index
       .search(searchQuery, { expand: true })
       .map(
         ({ ref }: { ref: string }) =>
           index!.documentStore.getDoc(ref) as SearchResult
       );
+
+    // Set search results in the state
     setResults(searchResults);
   };
 

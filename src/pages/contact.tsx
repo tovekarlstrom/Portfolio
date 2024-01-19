@@ -24,11 +24,9 @@ export const query = graphql`
   }
 `;
 export default function Contact({ data }: any) {
-  const siteTitle = `Title`;
   const contactData = data.contentfulPages;
   const image = getImage(data.contentfulPages.image);
-  //log the image
-  console.log("image", image);
+
   return (
     <Layout>
       <main
