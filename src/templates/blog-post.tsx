@@ -180,6 +180,7 @@ const LinkToProject = styled.div`
     font-weight: 700;
     line-height: normal;
     text-decoration-line: underline;
+    padding: 5px;
   }
 `;
 
