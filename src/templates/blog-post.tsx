@@ -260,6 +260,7 @@ const Category = styled.p`
   position: absolute;
   bottom: -40px;
   left: -5%;
+  color: black;
   background-color: rgba(237, 207, 120, 0.75);
 `;
 const ProjectInfoContainer = styled.div`
