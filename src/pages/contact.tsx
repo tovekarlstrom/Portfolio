@@ -5,6 +5,44 @@ import { documentToReactComponents } from "@contentful/rich-text-react-renderer"
 import styled from "@emotion/styled";
 import { GatsbyImage, getImage } from "gatsby-plugin-image";
 
+interface QueryResult {
+  data: {
+    contentfulPages: {
+      slug: string;
+      title: string;
+      description: {
+        raw: string;
+      };
+      image: {
+        description: string;
+        gatsbyImageData: {
+          images: {
+            fallback: {
+              src: string;
+              srcSet: string;
+              sizes: string;
+            };
+          };
+          layout: string;
+          backgroundColor: string;
+          width: number;
+          height: number;
+          placeholder: string;
+          blurredOptions: {
+            width: number;
+          };
+          formats: string[];
+          aspectRatio: number;
+        };
+      };
+
+      link: {
+        raw: string;
+      };
+    };
+  };
+}
+
 export const query = graphql`
   query MyQuery {
     contentfulPages(slug: { eq: "contact" }) {
@@ -23,7 +61,7 @@ export const query = graphql`
     }
   }
 `;
-export default function Contact({ data }: any) {
+export default function Contact({ data }: QueryResult) {
   const contactData = data.contentfulPages;
   const image = getImage(data.contentfulPages.image);
 

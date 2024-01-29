@@ -4,6 +4,47 @@ import { graphql } from "gatsby";
 import { documentToReactComponents } from "@contentful/rich-text-react-renderer";
 import { GatsbyImage, getImage } from "gatsby-plugin-image";
 import styled from "@emotion/styled";
+interface QueryResult {
+  data: {
+    contentfulAbout: {
+      slug: string;
+      title: string;
+      description: {
+        raw: string;
+      };
+      education: {
+        raw: string;
+      };
+      experience: {
+        raw: string;
+      };
+      skills: {
+        raw: string;
+      };
+      portrait: {
+        gatsbyImageData: {
+          images: {
+            fallback: {
+              src: string;
+              srcSet: string;
+              sizes: string;
+            };
+          };
+          layout: string;
+          backgroundColor: string;
+          width: number;
+          height: number;
+          placeholder: string;
+          blurredOptions: {
+            width: number;
+          };
+          formats: string[];
+          aspectRatio: number;
+        };
+      };
+    };
+  };
+}
 
 export const query = graphql`
   query MyQuery {
@@ -28,7 +69,7 @@ export const query = graphql`
     }
   }
 `;
-const About = ({ data }: any) => {
+const About = ({ data }: QueryResult) => {
   const posts = data.contentfulAbout;
 
   return (

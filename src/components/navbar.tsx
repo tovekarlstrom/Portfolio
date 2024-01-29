@@ -4,17 +4,28 @@ import styled from "@emotion/styled";
 import { Search, X, List } from "react-bootstrap-icons";
 import Header from "./header";
 
+export interface DataInterface {
+  site: {
+    siteMetadata: {
+      menuLinks: {
+        name: string;
+        link: string;
+      }[];
+    };
+  };
+}
+interface MenuLink {
+  name: string;
+  link: string;
+}
+
 function NavBar() {
   const [showSearchContainer, setShowSearchContainer] = useState(false);
   const [smallScreenMenu, setSmallScreenMenu] = useState(
     typeof window !== "undefined" && window.innerWidth > 768 ? false : true
   );
   const [showHamburgerMenu, setShowHamburgerMenu] = useState(false);
-  const [selectedLink, setSelectedLink] = useState(null);
 
-  const handleLinkClick = (index: any) => {
-    setSelectedLink(index);
-  };
   const data = useStaticQuery(graphql`
     query {
       site {
@@ -84,20 +95,22 @@ function NavBar() {
           )}
           {showHamburgerMenu && (
             <HamburgerMenuList>
-              {data.site.siteMetadata.menuLinks.map((link: any, index: any) => (
-                <ListItem key={index} className="menu-item">
-                  <Link
-                    activeStyle={{
-                      borderBottom: "solid white 1.5px",
-                      borderRight: "solid white 1.5px",
-                      padding: "0 5px 5px 0",
-                    }}
-                    to={link.link}
-                  >
-                    {link.name}
-                  </Link>
-                </ListItem>
-              ))}
+              {data.site.siteMetadata.menuLinks.map(
+                (link: MenuLink, index: number) => (
+                  <ListItem key={index} className="menu-item">
+                    <Link
+                      activeStyle={{
+                        borderBottom: "solid white 1.5px",
+                        borderRight: "solid white 1.5px",
+                        padding: "0 5px 5px 0",
+                      }}
+                      to={link.link}
+                    >
+                      {link.name}
+                    </Link>
+                  </ListItem>
+                )
+              )}
               <ListItem>
                 <Header />
               </ListItem>
@@ -108,20 +121,22 @@ function NavBar() {
       {!smallScreenMenu && (
         <nav>
           <NavBarList>
-            {data.site.siteMetadata.menuLinks.map((link: any, index: any) => (
-              <ListItem key={index}>
-                <Link
-                  activeStyle={{
-                    borderBottom: "solid white 1.5px",
-                    borderRight: "solid white 1.5px",
-                    padding: "5px",
-                  }}
-                  to={link.link}
-                >
-                  {link.name}
-                </Link>
-              </ListItem>
-            ))}
+            {data.site.siteMetadata.menuLinks.map(
+              (link: MenuLink, index: number) => (
+                <ListItem key={index}>
+                  <Link
+                    activeStyle={{
+                      borderBottom: "solid white 1.5px",
+                      borderRight: "solid white 1.5px",
+                      padding: "5px",
+                    }}
+                    to={link.link}
+                  >
+                    {link.name}
+                  </Link>
+                </ListItem>
+              )
+            )}
             <ListItem>
               {showSearchContainer ? (
                 <X

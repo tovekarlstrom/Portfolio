@@ -5,7 +5,7 @@ import { Footer } from "./footer";
 import "../style.css";
 import Head from "./head";
 
-const Layout = ({ title, children }: any) => {
+const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const data = useStaticQuery(graphql`
     query {
       site {

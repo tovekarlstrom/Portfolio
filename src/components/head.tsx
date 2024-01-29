@@ -4,7 +4,7 @@ import { useStaticQuery, graphql, HeadFC } from "gatsby";
 
 const Head = () => {
   const data = useStaticQuery(graphql`
-    query {
+    query SiteMetadata {
       site {
         siteMetadata {
           title

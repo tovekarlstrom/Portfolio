@@ -2,6 +2,11 @@ import React from "react";
 import { StaticQuery, graphql } from "gatsby";
 
 import SearchProject from "./search";
+interface QueryResult {
+  siteSearchIndex: {
+    index: string;
+  };
+}
 
 const Header = () => (
   <StaticQuery
@@ -12,7 +17,7 @@ const Header = () => (
         }
       }
     `}
-    render={(data) => (
+    render={(data: QueryResult) => (
       <header>
         <SearchProject searchIndex={data.siteSearchIndex.index} />
       </header>

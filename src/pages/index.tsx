@@ -31,7 +31,25 @@ interface Contentful {
         raw: string;
       };
       image: {
-        gatsbyImageData: any;
+        gatsbyImageData: {
+          images: {
+            fallback: {
+              src: string;
+              srcSet: string;
+              sizes: string;
+            };
+          };
+          layout: string;
+          backgroundColor: string;
+          width: number;
+          height: number;
+          placeholder: string;
+          blurredOptions: {
+            width: number;
+          };
+          formats: string[];
+          aspectRatio: number;
+        };
         description: string;
       };
     };
@@ -43,7 +61,7 @@ const IndexPage = ({ data }: Contentful) => {
   const image = getImage(data.contentfulPages.image);
 
   return (
-    <Layout data={data}>
+    <Layout>
       <main>
         <UpperContainer>
           <InnerLeftContainer>

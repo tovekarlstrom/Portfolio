@@ -1,11 +1,28 @@
-import { GatsbyNode } from "gatsby";
+import type { GatsbyNode } from "gatsby";
 import path from "path";
 
-exports.createPages = async ({ graphql, actions, reporter }: any) => {
+interface ProjectNode {
+  projectTitle: string;
+  slug: string;
+}
+
+interface AllContentfulProjects {
+  nodes: ProjectNode[];
+}
+
+interface QueryResult {
+  allContentfulProjects: AllContentfulProjects;
+}
+
+export const createPages: GatsbyNode["createPages"] = async ({
+  actions,
+  graphql,
+  reporter,
+}) => {
   const { createPage } = actions;
   // Define a template for blog post
   const blogPost = path.resolve("./src/templates/blog-post.tsx");
-  const result = await graphql(`
+  const result = await graphql<QueryResult>(`
     {
       allContentfulProjects {
         nodes {
@@ -22,9 +39,9 @@ exports.createPages = async ({ graphql, actions, reporter }: any) => {
     );
     return;
   }
-  const posts = result.data.allContentfulProjects.nodes;
-  if (posts.length > 0) {
-    posts.forEach((post: any) => {
+  const posts = result.data?.allContentfulProjects.nodes;
+  if (posts && posts.length > 0) {
+    posts.forEach((post: ProjectNode) => {
       createPage({
         path: `projects/${post.slug}/`,
         component: blogPost,

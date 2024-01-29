@@ -10,8 +10,11 @@ interface SearchResult {
   id: string;
   categories: string[];
 }
+interface SearchIndex {
+  searchIndex: string;
+}
 
-const SearchProject = ({ searchIndex }: any) => {
+const SearchProject = ({ searchIndex }: SearchIndex) => {
   const [query, setQuery] = useState("");
   const [results, setResults] = useState<SearchResult[]>([]);
 
@@ -19,7 +22,7 @@ const SearchProject = ({ searchIndex }: any) => {
 
   // Function to get or create the search index
   const getOrCreateIndex = () =>
-    index ? index : Index.load<SearchResult>(searchIndex);
+    index ? index : Index.load<SearchResult>(JSON.parse(searchIndex));
 
   // Function to perform search based on the provided query
   const performSearch = (searchQuery: string) => {

@@ -11,7 +11,25 @@ interface AllContentfulProjecs {
     categories: string[];
     projectThumbnail: {
       description: string;
-      gatsbyImageData: any;
+      gatsbyImageData: {
+        images: {
+          fallback: {
+            src: string;
+            srcSet: string;
+            sizes: string;
+          };
+        };
+        layout: string;
+        backgroundColor: string;
+        width: number;
+        height: number;
+        placeholder: string;
+        blurredOptions: {
+          width: number;
+        };
+        formats: string[];
+        aspectRatio: number;
+      };
     };
   };
 }

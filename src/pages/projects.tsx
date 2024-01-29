@@ -53,7 +53,25 @@ interface Contentful {
             url: string;
           };
           projectThumbnail: {
-            gatsbyImageData: any;
+            gatsbyImageData: {
+              images: {
+                fallback: {
+                  src: string;
+                  srcSet: string;
+                  sizes: string;
+                };
+              };
+              layout: string;
+              backgroundColor: string;
+              width: number;
+              height: number;
+              placeholder: string;
+              blurredOptions: {
+                width: number;
+              };
+              formats: string[];
+              aspectRatio: number;
+            };
             description: string;
           };
         }
@@ -69,12 +87,12 @@ const IndexPage = ({ data }: Contentful) => {
 
   // Extract all unique categories from the projectData array of posts
   const allCategories = Array.from(
-    new Set(projectData.flatMap((post: any) => post.categories))
+    new Set(projectData.flatMap((post) => post.categories))
   );
 
   // Filter posts based on selected categoryData: show all posts if "All" is chosen,
   // otherwise, return posts that include the selected category
-  const filteredPosts = projectData.filter((post: any) => {
+  const filteredPosts = projectData.filter((post) => {
     if (categoryData === "All") {
       // Return all posts when "All" is selected
       return projectData;
@@ -85,7 +103,7 @@ const IndexPage = ({ data }: Contentful) => {
   });
 
   return (
-    <Layout data={data}>
+    <Layout>
       <main
         style={{
           display: "flex",
@@ -122,7 +140,7 @@ const IndexPage = ({ data }: Contentful) => {
               onChange={(e) => setCategoryData(e.target.value)}
             >
               <option value="All">All</option>
-              {allCategories.map((category: any, index) => (
+              {allCategories.map((category, index) => (
                 <option key={category} value={category}>
                   {category}
                 </option>
@@ -130,7 +148,7 @@ const IndexPage = ({ data }: Contentful) => {
             </SelectCategory>
           </label>
           <ProjectContainer>
-            {filteredPosts.map((item: any) => (
+            {filteredPosts.map((item) => (
               <ProjectCard key={item.id} data={item} />
             ))}
           </ProjectContainer>
